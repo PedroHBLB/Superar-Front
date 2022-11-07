@@ -1,0 +1,38 @@
+{
+  "expo": {
+    "owner": "pedro.barb",
+    "name": "SuperarParaInovar",
+    "slug": "superarparainovar",
+    "orientation": "portrait",
+    "icon": "./assets/app-icon.png",
+    "splash": {
+      "image": "./assets/splash.png",
+      "backgroundColor": "#651D32"
+    },
+    "ios": {
+      "infoPlist": {
+        "CFBundleLocalizations": ["pt"],
+        "CFBundleDevelopmentRegion": ["pt"],
+        "NSCameraUsageDescription": "When you release the use of the camera for the SuperarParaInovar app, you can take your photos and send them for approval without accessing the gallery.",
+        "NSPhotoLibraryUsageDescription": "When you grant access to your photos, videos and documents, you can select more than one media to be approved at the same time, your gallery data will not be viewed, only those sent."
+      },
+      "bundleIdentifier": "com.spi.superarparainovar",
+      "buildNumber": "1.0.4"
+    },
+    "android": {
+      "package": "com.spi.superarparainovar",
+      "versionCode": 9
+    },
+    "version": "1.0.4",
+    "description": "Aplicativo Superar Para Inovar - SPI ",
+    "assetBundlePatterns": [
+      "assets/*",
+      "src/assets/*"
+    ],
+    "locales": {
+      "pt": "./locales/ios/pt.json"
+    }
+  },
+  "name": "superar-para-inovar",
+  "displayName": "SuperarParaInovar"
+}

@@ -1,0 +1,4 @@
+{
+  "NSCameraUsageDescription": "Quando você libera o uso da câmera para o aplicativo SuperarParaInovar, você pode tirar suas fotos e enviar para aprovação sem acessar a galeria.",
+  "NSPhotoLibraryUsageDescription": "Quando você concede acesso às suas fotos, vídeos e documentos, você pode selecionar mais de uma mídia para ser aprovada ao mesmo tempo, os dados de sua galeria nao serão visualizados, somente aqueles enviados."
+}
