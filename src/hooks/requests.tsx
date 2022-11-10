@@ -19,6 +19,7 @@ interface RequestContextData {
   documents: File[];
   handleNewComprovante: (data: any) => void;
   handleNewDocument: (data: any) => void;
+  handleNewInovacao: (data: any) => void;
   fetchProfilePosts: () => Promise<void>;
   fetchProfilePostsMore: (distance: number) => Promise<void>;
   fetchProfileDocuments: () => Promise<void>;
@@ -44,6 +45,10 @@ function RequestProvider({ children }: RequestProviderProps) {
   };
 
   const handleNewDocument = async (data: any) => {
+    setDocuments((oldState) => [data, ...oldState]);
+  };
+
+  const handleNewInovacao = async (data: any) => {
     setDocuments((oldState) => [data, ...oldState]);
   };
 
@@ -105,6 +110,7 @@ function RequestProvider({ children }: RequestProviderProps) {
         documents,
         handleNewComprovante,
         handleNewDocument,
+        handleNewInovacao,
         fetchProfilePosts,
         fetchProfilePostsMore,
         fetchProfileDocuments,

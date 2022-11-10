@@ -111,6 +111,7 @@ export function SignUp() {
     }
 
     try {
+      setLoading(true);
       const newColaborador = {
         name: form.name,
         email: form.email,

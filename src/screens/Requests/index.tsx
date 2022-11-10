@@ -87,7 +87,7 @@ export function Requests() {
   const [textTitle, setTextTitle] = useState("");
   const [text, setText] = useState("");
   const { colaborador } = useAuth();
-  const { handleNewComprovante, handleNewDocument } = useRequest();
+  const { handleNewComprovante, handleNewDocument, handleNewInovacao } = useRequest();
   const theme = useTheme();
   const route = useRoute();
   const { title, type, data } = route.params as Params;
@@ -277,8 +277,8 @@ export function Requests() {
     };
 
     const newDonateComprovante = {
-      //nome: "rsi",
-      //descricao: text,
+      nome: "rsi",
+      descricao: text,
       categoria: selectedCategory,
       legenda: text,
       isAvailable: isChecked,
@@ -286,13 +286,13 @@ export function Requests() {
     try {
       setLoading(true);
       let url = "/pilares/saude";
-      //if (selectedCategory === "donate") url = "/pilares/interno";
+      if (selectedCategory === "donate") url = "/pilares/interno";
 
       const { data } = await api.post(
         url,
         selectedCategory === "donate" ? newDonateComprovante : newComprovante
       );
-    
+
       const newImagesToUpload = new FormData();
 
       images.forEach((image) => {
@@ -323,11 +323,12 @@ export function Requests() {
           );
         }
       });
+      console.log(newImagesToUpload);
 
       url = `/pilares/saude/photos?post_id=${data}`;
       if (selectedCategory === "donate")
-        //url = `/pilares/interno/photo?interno_id=${data}`;
-        url = `/pilares/saude/photos?post_id=${data}`;
+        url = `/pilares/interno/photo?interno_id=${data}`;
+      // url = `/pilares/saude/photos?post_id=${data}`;
 
       if (selectedCategory !== "donate") {
         await api
@@ -339,7 +340,8 @@ export function Requests() {
             setSelectedCategory("");
             setCharNumber(limit);
 
-            // console.log(response.data);
+            console.log(response.data);
+            console.log("Passei!");
             handleNewComprovante(response.data);
 
             return handleToast(
@@ -349,6 +351,7 @@ export function Requests() {
           })
           .catch((error) => {
             console.log(error);
+            console.log("Não passei!");
             return handleToast(
               "Não foi possível enviar,\ntente novamente mais tarde!",
               theme.colors.toast_error
@@ -356,7 +359,7 @@ export function Requests() {
           });
       } else if (selectedCategory === "donate") {
         await api
-          .post(url, newImagesToUpload)
+          .patch(url, newImagesToUpload)
           .then((response) => {
             setText("");
             setImages([]);
@@ -397,6 +400,59 @@ export function Requests() {
     }
   };
 
+  const handleSendInovacao = async () => {
+    if (!textTitle || !text) {
+      return handleToast("Campos não preenchidos❕", theme.colors.toast_error);
+    } else {
+      console.log("Passei");
+    }
+
+    const newInovacao = {
+      titulo: textTitle,
+      descricao: text,
+    }
+
+    try {
+      setLoading(true);
+
+      const { data } = await api.post("/pilares/inovacao", newInovacao);
+
+      const newInovacaoToSend = {
+        titulo: textTitle,
+        descricao: text,
+      }
+
+      const url = `${data}`
+      if(selectedCategory === "inovacao"){
+        await api
+        .post(url, newInovacaoToSend)
+        .then((response) => {
+          setTextTitle("");
+          setText("");
+
+          handleNewInovacao(response.data);
+          return handleToast(
+            "Enviado com sucesso❕",
+            theme.colors.toast_success
+          );
+        })
+        .catch((error) => {
+          return handleToast(
+            "Não foi possível enviar,\ntente novamente mais tarde!",
+            theme.colors.toast_error
+          );
+        })
+      }
+    } catch (error: any) {
+      return handleToast(
+        "Não foi possível enviar,\ntente novamente mais tarde!",
+        theme.colors.toast_error
+      );
+    } finally {
+      setLoading(false);
+    }
+  }
+
   useEffect(() => {
     loadCategory();
     if (!data) return setImages([] as Asset[]);
@@ -417,12 +473,14 @@ export function Requests() {
               title={title}
               loading={loading}
               confirm={
-                type === "comprovante" || type === "resumo" ? true : false
+                type === "comprovante" || type === "resumo" || type === "inovacao" ? true : false
               }
               handleSendForms={
-                type === "comprovante"
-                  ? handleSendComprovante
-                  : handleSendDocument
+                type === "inovacao"
+                  ? handleSendInovacao
+                  : type === "comprovante"
+                    ? handleSendComprovante
+                    : handleSendDocument
               }
             />
             <RequestContainer>
@@ -471,14 +529,14 @@ export function Requests() {
                   )}
                   {((type === "resumo" && selectedCategory !== "lecture") ||
                     type === "inovacao") && (
-                    <RequestTitle
-                      value={textTitle}
-                      maxLength={100}
-                      placeholder="Título"
-                      placeholderTextColor={theme.colors.shape_light_opacity100}
-                      onChangeText={(text) => setTextTitle(text)}
-                    />
-                  )}
+                      <RequestTitle
+                        value={textTitle}
+                        maxLength={100}
+                        placeholder="Título"
+                        placeholderTextColor={theme.colors.shape_light_opacity100}
+                        onChangeText={(text) => setTextTitle(text)}
+                      />
+                    )}
                   {selectedCategory !== "lecture" && (
                     <Subtitle>
                       <SubtitleTitle>
