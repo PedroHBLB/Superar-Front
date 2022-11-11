@@ -406,8 +406,9 @@ export function Requests() {
     } else {
       console.log("Passei");
     }
-
+    
     const newInovacao = {
+      // categoria: selectedCategory,
       titulo: textTitle,
       descricao: text,
     }
@@ -418,10 +419,10 @@ export function Requests() {
       const { data } = await api.post("/pilares/inovacao", newInovacao);
 
       const newInovacaoToSend = {
+        // categoria: selectedCategory,
         titulo: textTitle,
         descricao: text,
       }
-
       const url = `${data}`
       if(selectedCategory === "inovacao"){
         await api
@@ -437,6 +438,7 @@ export function Requests() {
           );
         })
         .catch((error) => {
+          console.log("Passei não!")
           return handleToast(
             "Não foi possível enviar,\ntente novamente mais tarde!",
             theme.colors.toast_error

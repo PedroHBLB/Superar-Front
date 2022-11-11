@@ -49,10 +49,11 @@ export function ModalViewProfileRanking({ closeModal, visible }: Props) {
   const { colaborador, firstMonth } = useAuth();
   const detailsScore = {
     saude: "Saúde",
-    conhecimento: "Conhecimento e inovação",
+    conhecimento: "Conhecimento",
     qualidade: "Qualidade",
     wtt: "Walk the talk",
     rsi: "Responsabilidade Social Individual",
+    inovacao: "Inovação"
   };
   const currentMonth = new Date();
   const currentMonthFormatted = format(new Date(), "MMMM", {

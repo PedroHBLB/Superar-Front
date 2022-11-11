@@ -42,10 +42,11 @@ export function ModalViewOtherRanking({ user, visible, closeModal }: Props) {
 
   const detailsScore = {
     saude: "Saúde",
-    conhecimento: "Conhecimento e inovação",
+    conhecimento: "Conhecimento",
     qualidade: "Qualidade",
     wtt: "Walk the talk",
     rsi: "Responsabilidade Social Individual",
+    inovacao: "Inovação"
   };
   const fetchAnotherRanking = async () => {
     try {
