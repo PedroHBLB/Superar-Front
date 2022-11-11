@@ -403,10 +403,8 @@ export function Requests() {
   const handleSendInovacao = async () => {
     if (!textTitle || !text) {
       return handleToast("Campos não preenchidos❕", theme.colors.toast_error);
-    } else {
-      console.log("Passei");
     }
-    
+
     const newInovacao = {
       // categoria: selectedCategory,
       titulo: textTitle,
@@ -423,48 +421,45 @@ export function Requests() {
         titulo: textTitle,
         descricao: text,
       }
-      const url = `${data}`
-      if(selectedCategory === "inovacao"){
+      let url = `${data}`
+      if (selectedCategory === "inovacao") {
         await api
-        .post(url, newInovacaoToSend)
-        .then((response) => {
-          setTextTitle("");
-          setText("");
+          .post(url, newInovacaoToSend)
+          .then((response) => {
+            setTextTitle("");
+            setText("");
 
-          handleNewInovacao(response.data);
-          return handleToast(
-            "Enviado com sucesso❕",
-            theme.colors.toast_success
-          );
-        })
-        .catch((error) => {
-          console.log("Passei não!")
-          return handleToast(
-            "Não foi possível enviar,\ntente novamente mais tarde!",
-            theme.colors.toast_error
-          );
-        })
+            console.log("Passei!")
+            handleNewInovacao(response.data);
+            return handleToast(
+              "Enviado com sucesso❕",
+              theme.colors.toast_success
+            );
+          })
+          .catch((error) => {
+            console.log("Passei não!")
+            return handleToast(
+              "Não foi possível enviar,\ntente novamente mais tarde!",
+              theme.colors.toast_error
+            );
+          })
       }
     } catch (error: any) {
+      console.log("Estou aqui");
       return handleToast(
         "Não foi possível enviar,\ntente novamente mais tarde!",
         theme.colors.toast_error
       );
     } finally {
+      console.log("Estou aqui agora");
       setLoading(false);
+      return handleToast(
+        "Enviado com sucesso❕",
+        theme.colors.toast_success
+      );
     }
   }
 
-  useEffect(() => {
-    loadCategory();
-    if (!data) return setImages([] as Asset[]);
-    const results = data.filter(
-      ({ id: id1 }) => !images.some(({ id: id2 }) => id2 === id1)
-    );
-    const newImages: Asset[] = [...results];
-
-    setImages((oldState) => [...oldState, ...newImages]);
-  }, [data]);
 
   return (
     <>
