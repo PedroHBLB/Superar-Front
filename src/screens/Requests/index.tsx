@@ -459,6 +459,16 @@ export function Requests() {
       );
     }
   }
+  useEffect(() => {
+    loadCategory();
+    if (!data) return setImages([] as Asset[]);
+    const results = data.filter(
+      ({ id: id1 }) => !images.some(({ id: id2 }) => id2 === id1)
+    );
+    const newImages: Asset[] = [...results];
+
+    setImages((oldState) => [...oldState, ...newImages]);
+  }, [data]);
 
 
   return (

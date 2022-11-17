@@ -150,9 +150,10 @@ export const SubtitleText = styled(TextInput).attrs({
 export const LessonLearnedLink = styled.Text`
   font-family: ${({ theme }) => theme.fonts.medium};
   font-size: ${RFValue(13)}px;
-  color: ${({ theme }) => theme.colors.link};
-  text-decoration: underline;
+  color: ${({ theme }) => theme.colors.primary};
+  text-decoration: none;
   text-decoration-color: ${({ theme }) => theme.colors.link};
+  text-align: center;
 
   margin-bottom: 30px;
 `;
