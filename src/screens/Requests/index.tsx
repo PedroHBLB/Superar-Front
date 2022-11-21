@@ -19,6 +19,7 @@ import { requests } from "../../utils/requests";
 import { DropDown } from "../../components/DropDown";
 import { PhotoContainer } from "../../components/PhotoContainer";
 import { DocumentContainer } from "../../components/DocumentContainer";
+import { Video } from 'expo-av';
 
 import SuperarSvg from "../../assets/superar-para-inovar.svg";
 import {
@@ -43,6 +44,7 @@ import {
   CheckboxContainer,
   CheckboxIcon,
   CheckboxText,
+  View,
 } from "./styles";
 import { Checkbox } from "react-native-paper";
 import { useRequest } from "../../hooks/requests";
@@ -331,8 +333,16 @@ export function Requests() {
       // url = `/pilares/saude/photos?post_id=${data}`;
 
       if (selectedCategory !== "donate") {
-        await api
-          .post(url, newImagesToUpload)
+        for(let i = 0; i <= 3; i++){
+          console.log(`For: ${i}`);
+          await api
+          .post(url, newImagesToUpload, 
+            {
+              headers: {
+                'Content-Type': 'multipart/form-data'
+              }
+            }
+            )
           .then((response) => {
             setText("");
             setImages([]);
@@ -357,8 +367,14 @@ export function Requests() {
               theme.colors.toast_error
             );
           });
-      } else if (selectedCategory === "donate") {
-        await api
+
+        }
+      } 
+      
+      else if (selectedCategory === "donate") {
+        for(let i = 0; i <= 3; i++){
+          console.log(`For: ${i}`);
+          await api
           .patch(url, newImagesToUpload)
           .then((response) => {
             setText("");
@@ -388,6 +404,7 @@ export function Requests() {
               theme.colors.toast_error
             );
           });
+        }
       }
     } catch (err: any) {
       console.log(err);
@@ -603,6 +620,18 @@ export function Requests() {
                   >
                     Acessar o PmToolBox
                   </LessonLearnedLink>
+                  <Video 
+                  style={{
+                    justifyContent: 'center', 
+                    alignSelf: 'center', 
+                    width: 400, 
+                    height: 300,
+                    borderWidth: 2,
+                    borderColor: theme.colors.primary,
+                  }}
+                    resizeMode="contain"
+                    useNativeControls ={true}
+                    source={{uri: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"}}/>
                 </RequestContainerPillar>
               )}
             </RequestContainer>
