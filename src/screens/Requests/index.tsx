@@ -333,6 +333,7 @@ export function Requests() {
       // url = `/pilares/saude/photos?post_id=${data}`;
 
       if (selectedCategory !== "donate") {
+        let verfifica = true;
         for(let i = 0; i <= 3; i++){
           console.log(`For: ${i}`);
           await api
@@ -344,20 +345,20 @@ export function Requests() {
             }
             )
           .then((response) => {
-            setText("");
-            setImages([]);
-            setShowedCategory("");
-            setSelectedCategory("");
-            setCharNumber(limit);
-
-            console.log(response.data);
-            console.log("Passei!");
-            handleNewComprovante(response.data);
-
-            return handleToast(
-              "Enviado com sucesso❕",
-              theme.colors.toast_success
-            );
+              setText("");
+              setImages([]);
+              setShowedCategory("");
+              setSelectedCategory("");
+              setCharNumber(limit);
+  
+              console.log(response.data);
+              console.log("Passei!");
+              handleNewComprovante(response.data);
+              verfifica = false;
+              return handleToast(
+                "Enviado com sucesso❕",
+                theme.colors.toast_success
+              );
           })
           .catch((error) => {
             console.log(error);
@@ -367,7 +368,9 @@ export function Requests() {
               theme.colors.toast_error
             );
           });
-
+          if(verfifica !== true){
+            break;
+          } 
         }
       } 
       
