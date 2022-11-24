@@ -375,6 +375,7 @@ export function Requests() {
       } 
       
       else if (selectedCategory === "donate") {
+        let verfifica = true;
         for(let i = 0; i <= 3; i++){
           console.log(`For: ${i}`);
           await api
@@ -388,6 +389,7 @@ export function Requests() {
 
             // console.log(response.data);
             handleNewComprovante(response.data);
+            verfifica = false;
             return Toast.show("Enviado com sucesso!", {
               position: Toast.positions.BOTTOM,
               backgroundColor: theme.colors.toast_success,
@@ -407,6 +409,9 @@ export function Requests() {
               theme.colors.toast_error
             );
           });
+          if(verfifica !== true){
+            break;
+          } 
         }
       }
     } catch (err: any) {

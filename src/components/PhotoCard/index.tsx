@@ -22,7 +22,8 @@ export function PhotoCard({ post, loading, ...rest }: Props) {
   const preview = {
     uri: theme.preview,
   };
-  const { uri } = post?.photos[0];
+  const { uri } = post.photos[0];
+  //const { uri } = post?.photos[0];
   const myHeaders = {
     Authorization: `Bearer ${colaborador.access_token}`,
   };
