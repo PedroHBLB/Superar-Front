@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { ActivityIndicator } from "react-native";
+import { ActivityIndicator, RefreshControl } from "react-native";
 
 import { format } from "date-fns";
 import { api } from "../../services/api";
@@ -25,6 +25,7 @@ import { UnderConstruction } from "../../components/UnderConstruction";
 type RankingCardProps = UserRanking[];
 
 export function Ranking() {
+  const [isRefreshing, setIsRefreshing] = useState(false);
   const [filter, setFilter] = useState<
     "TODOS" | "ADM" | "AT" | "IC" | "IT" | "OT" | "PMO" | "SUL" | "VENDAS"
   >("TODOS");
@@ -76,6 +77,20 @@ export function Ranking() {
 
     return position;
   };
+
+  const refreshRanking = async () => {
+    setIsRefreshing(true);
+    try {
+      const { data } = await api.get(
+        `/colaboradores/scores?redirect_month=${currentMonth}&limit=8`
+      )
+      setData(data);
+      setPage(1);
+      setIsRefreshing(false);
+    }catch (error) {
+      console.log(error);
+    }
+  }
 
   const fetchRanking = async () => {
     try {
@@ -165,6 +180,14 @@ export function Ranking() {
               ) : (
                 <></>
               )
+            }
+            refreshControl = {
+              <RefreshControl 
+                refreshing={isRefreshing}
+                onRefresh={refreshRanking}
+                colors={[theme.colors.primary]}
+                tintColor={theme.colors.primary}
+              />
             }
           />
         )}
