@@ -635,18 +635,6 @@ export function Requests() {
                   >
                     Acessar o PmToolBox
                   </LessonLearnedLink>
-                  <Video 
-                  style={{
-                    justifyContent: 'center', 
-                    alignSelf: 'center', 
-                    width: 400, 
-                    height: 300,
-                    borderWidth: 2,
-                    borderColor: theme.colors.primary,
-                  }}
-                    resizeMode="contain"
-                    useNativeControls ={true}
-                    source={{uri: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"}}/>
                 </RequestContainerPillar>
               )}
             </RequestContainer>
