@@ -233,6 +233,9 @@ export function Requests() {
 
       const url = `/pilares/conhecimento/document?conhecimento_id=${data}`;
 
+      let verifica = true;
+      for(let i = 0; i <= 3; i++){
+        console.log(`For: ${i}`);
       await api
         .post(url, newDocumentToUpload)
         .then((response) => {
@@ -246,7 +249,7 @@ export function Requests() {
 
           // console.log(response.data);
           handleNewDocument(response.data);
-
+          verifica = false;
           return handleToast(
             "Enviado com sucesso❕",
             theme.colors.toast_success
@@ -258,6 +261,10 @@ export function Requests() {
             theme.colors.toast_error
           );
         });
+        if(verifica !== true){
+          break;
+        }
+      }
     } catch (error: any) {
       return handleToast(
         "Não foi possível enviar,\ntente novamente mais tarde!",
