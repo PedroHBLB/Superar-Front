@@ -43,8 +43,7 @@ import {
   CheckboxIsAvailable,
   CheckboxContainer,
   CheckboxIcon,
-  CheckboxText,
-  View,
+  CheckboxText
 } from "./styles";
 import { Checkbox } from "react-native-paper";
 import { useRequest } from "../../hooks/requests";
@@ -234,34 +233,34 @@ export function Requests() {
       const url = `/pilares/conhecimento/document?conhecimento_id=${data}`;
 
       let verifica = true;
-      for(let i = 0; i <= 3; i++){
+      for (let i = 0; i <= 3; i++) {
         console.log(`For: ${i}`);
-      await api
-        .post(url, newDocumentToUpload)
-        .then((response) => {
-          setText("");
-          setTextTitle("");
-          setDocuments({} as Document);
-          setImages([]);
-          setShowedCategory("");
-          setSelectedCategory("");
-          setCharNumber(limit);
+        await api
+          .post(url, newDocumentToUpload)
+          .then((response) => {
+            setText("");
+            setTextTitle("");
+            setDocuments({} as Document);
+            setImages([]);
+            setShowedCategory("");
+            setSelectedCategory("");
+            setCharNumber(limit);
 
-          // console.log(response.data);
-          handleNewDocument(response.data);
-          verifica = false;
-          return handleToast(
-            "Enviado com sucesso❕",
-            theme.colors.toast_success
-          );
-        })
-        .catch((error) => {
-          return handleToast(
-            "Não foi possível enviar,\ntente novamente mais tarde!",
-            theme.colors.toast_error
-          );
-        });
-        if(verifica !== true){
+            // console.log(response.data);
+            handleNewDocument(response.data);
+            verifica = false;
+            return handleToast(
+              "Enviado com sucesso❕",
+              theme.colors.toast_success
+            );
+          })
+          .catch((error) => {
+            return handleToast(
+              "Não foi possível enviar,\ntente novamente mais tarde!",
+              theme.colors.toast_error
+            );
+          });
+        if (verifica !== true) {
           break;
         }
       }
@@ -337,27 +336,27 @@ export function Requests() {
       url = `/pilares/saude/photos?post_id=${data}`;
       if (selectedCategory === "donate")
         url = `/pilares/interno/photo?interno_id=${data}`;
-      // url = `/pilares/saude/photos?post_id=${data}`;
+        //url = `/pilares/saude/photos?post_id=${data}`;
 
       if (selectedCategory !== "donate") {
         let verfifica = true;
-        for(let i = 0; i <= 3; i++){
+        for (let i = 0; i <= 3; i++) {
           console.log(`For: ${i}`);
           await api
-          .post(url, newImagesToUpload, 
-            {
-              headers: {
-                'Content-Type': 'multipart/form-data'
+            .post(url, newImagesToUpload,
+              {
+                headers: {
+                  'Content-Type': 'multipart/form-data'
+                }
               }
-            }
             )
-          .then((response) => {
+            .then((response) => {
               setText("");
               setImages([]);
               setShowedCategory("");
               setSelectedCategory("");
               setCharNumber(limit);
-  
+
               console.log(response.data);
               console.log("Passei!");
               handleNewComprovante(response.data);
@@ -366,54 +365,59 @@ export function Requests() {
                 "Enviado com sucesso❕",
                 theme.colors.toast_success
               );
-          })
-          .catch((error) => {
-            console.log(error);
-            console.log("Não passei!");
-            return handleToast(
-              "Não foi possível enviar,\ntente novamente mais tarde!",
-              theme.colors.toast_error
-            );
-          });
-          if(verfifica !== true){
+            })
+            .catch((error) => {
+              console.log(error);
+              console.log("Não passei!");
+              return handleToast(
+                "Não foi possível enviar,\ntente novamente mais tarde!",
+                theme.colors.toast_error
+              );
+            });
+          if (verfifica !== true) {
             break;
-          } 
+          }
         }
-      } 
-      
+      }
+
       else if (selectedCategory === "donate") {
-        for(let i = 0; i <= 3; i++){
+        let verfifica = true;
+        for (let i = 0; i <= 3; i++) {
           console.log(`For: ${i}`);
           await api
-          .patch(url, newImagesToUpload)
-          .then((response) => {
-            setText("");
-            setImages([]);
-            setShowedCategory("");
-            setSelectedCategory("");
-            setCharNumber(limit);
+            .patch(url, newImagesToUpload)
+            .then((response) => {
+              setText("");
+              setImages([]);
+              setShowedCategory("");
+              setSelectedCategory("");
+              setCharNumber(limit);
 
-            // console.log(response.data);
-            handleNewComprovante(response.data);
-            return Toast.show("Enviado com sucesso!", {
-              position: Toast.positions.BOTTOM,
-              backgroundColor: theme.colors.toast_success,
-              textStyle: {
-                fontSize: RFValue(15),
-              },
-              containerStyle: {
-                borderRadius: RFValue(30),
-                paddingVertical: RFValue(15),
-                paddingHorizontal: RFValue(25),
-              },
+              // console.log(response.data);
+              handleNewComprovante(response.data);
+              verfifica = false;
+              return Toast.show("Enviado com sucesso!", {
+                position: Toast.positions.BOTTOM,
+                backgroundColor: theme.colors.toast_success,
+                textStyle: {
+                  fontSize: RFValue(15),
+                },
+                containerStyle: {
+                  borderRadius: RFValue(30),
+                  paddingVertical: RFValue(15),
+                  paddingHorizontal: RFValue(25),
+                },
+              });
+            })
+            .catch((error) => {
+              handleToast(
+                "Não foi possível enviar,\ntente novamente mais tarde!",
+                theme.colors.toast_error
+              );
             });
-          })
-          .catch((error) => {
-            handleToast(
-              "Não foi possível enviar,\ntente novamente mais tarde!",
-              theme.colors.toast_error
-            );
-          });
+          if (verfifica !== true) {
+            break;
+          }
         }
       }
     } catch (err: any) {
@@ -613,7 +617,13 @@ export function Requests() {
                   )}
                 </RequestContainerPillar>
               ) : (
-                <RequestContainerPillar>
+                <RequestContainerPillar style={{
+                  marginTop: '50%', 
+                  borderRadius: 10, 
+                  borderWidth: 3, 
+                  borderStyle: 'dashed', 
+                  borderColor: "#FFC72C"
+                  }}>
                   <LessonLearnedLink
                     onPress={() =>
                       handleOpenLink(
@@ -630,18 +640,6 @@ export function Requests() {
                   >
                     Acessar o PmToolBox
                   </LessonLearnedLink>
-                  <Video 
-                  style={{
-                    justifyContent: 'center', 
-                    alignSelf: 'center', 
-                    width: 400, 
-                    height: 300,
-                    borderWidth: 2,
-                    borderColor: theme.colors.primary,
-                  }}
-                    resizeMode="contain"
-                    useNativeControls ={true}
-                    source={{uri: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"}}/>
                 </RequestContainerPillar>
               )}
             </RequestContainer>
