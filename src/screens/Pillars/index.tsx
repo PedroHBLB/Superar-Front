@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Dimensions } from "react-native";
 import SuperarSvg from "../../assets/superar-para-inovar.svg";
 import { AboutHeader } from "../../components/AboutHeader";
@@ -8,7 +8,7 @@ import { ModalViewPillar } from "../../components/ModalViewPillar";
 
 import { texts } from "../../utils/pillars";
 
-import { Container, ButtonsContainer, ModalText, Footer } from "./styles";
+import { Container, ButtonsContainer, ModalText, Footer, View } from "./styles";
 
 type Pillar = {
   key: string;
@@ -18,6 +18,8 @@ type Pillar = {
 export function Pillars() {
   const [visible, setVisible] = useState(false);
   const [pillar, setPillar] = useState("");
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   function handleOpenModal(key: string) {
     const modalText = texts.find((pillar: Pillar) => pillar.key === key);
@@ -25,6 +27,15 @@ export function Pillars() {
     setPillar(modalText!.text);
     setVisible(true);
   }
+
+  const url = "http://192.168.11.105:3000/about/"
+  useEffect(() => {
+    fetch(url)
+    .then((response) => response.json())
+    .then((json) => setData(json))
+    .catch((err) => console.log(err)) 
+    .finally(() =>setLoading(false))
+  }, []);
 
   return (
     <Background>

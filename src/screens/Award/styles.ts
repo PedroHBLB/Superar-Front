@@ -11,3 +11,7 @@ export const Text = styled.Text`
   color: ${({ theme }) => theme.colors.shape};
   line-height: ${25}px;
 `;
+
+export const View = styled.View`
+  color: ${({ theme }) => theme.colors.shape};
+`

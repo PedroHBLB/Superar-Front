@@ -39,3 +39,15 @@ export const Categories = styled.View`
 export const Category = styled.View`
   padding-top: 15px;
 `;
+
+export const Button = styled.TouchableOpacity`
+  color: ${({ theme }) => theme.colors.shape};
+`
+
+export const FlatList = styled.FlatList`
+  color: ${({ theme }) => theme.colors.shape};
+`
+
+export const View = styled.View`
+  color: ${({ theme }) => theme.colors.shape};
+`

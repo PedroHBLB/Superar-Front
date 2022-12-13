@@ -29,7 +29,7 @@ type Props = {
 };
 
 type PillarScore = {
-  pilar: "saude" | "conhecimento" | "qualidade" | "wtt" | "rsi";
+  pilar: "saude" | "conhecimento" | "qualidade" | "wtt" | "rsi" | "inovacao";
   pontuacao_do_mes: number;
 };
 

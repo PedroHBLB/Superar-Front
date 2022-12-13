@@ -30,3 +30,18 @@ export const Footer = styled.View`
   align-items: center;
   margin-top: ${RFValue(10)}px;
 `;
+
+export const View = styled.View`
+  color: ${({ theme }) => theme.colors.shape};
+`
+
+export const Text = styled.Text`
+  font-family: ${({ theme }) => theme.fonts.regular};
+  font-size: ${RFValue(12)}px;
+  color: ${({ theme }) => theme.colors.shape};
+  line-height: ${25}px;
+`;
+
+export const ScrollContainer = styled.View`
+  padding-bottom: 40px;
+`;
