@@ -233,7 +233,7 @@ export function Requests() {
       const url = `/pilares/conhecimento/document?conhecimento_id=${data}`;
 
       let verifica = true;
-      for (let i = 0; i <= 3; i++) {
+      for (let i = 0; i <= 5; i++) {
         console.log(`For: ${i}`);
         await api
           .post(url, newDocumentToUpload)
@@ -340,7 +340,7 @@ export function Requests() {
 
       if (selectedCategory !== "donate") {
         let verfifica = true;
-        for (let i = 0; i <= 3; i++) {
+        for (let i = 0; i <= 5; i++) {
           console.log(`For: ${i}`);
           await api
             .post(url, newImagesToUpload,
@@ -382,7 +382,7 @@ export function Requests() {
 
       else if (selectedCategory === "donate") {
         let verfifica = true;
-        for (let i = 0; i <= 3; i++) {
+        for (let i = 0; i <= 5; i++) {
           console.log(`For: ${i}`);
           await api
             .patch(url, newImagesToUpload)
