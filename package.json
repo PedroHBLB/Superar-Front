@@ -34,7 +34,6 @@
     "expo-images-picker": "^2.0.1",
     "expo-linear-gradient": "~11.3.0",
     "expo-linking": "~3.1.0",
-    "expo-localization": "~13.0.0",
     "expo-media-library": "~14.1.0",
     "expo-modules-core": "~0.9.2",
     "expo-screen-orientation": "~4.2.0",

@@ -16,12 +16,14 @@
         "NSCameraUsageDescription": "When you release the use of the camera for the SuperarParaInovar app, you can take your photos and send them for approval without accessing the gallery.",
         "NSPhotoLibraryUsageDescription": "When you grant access to your photos, videos and documents, you can select more than one media to be approved at the same time, your gallery data will not be viewed, only those sent."
       },
+      "usesIcloudStorage": true,
       "bundleIdentifier": "com.spi.superarparainovar",
       "buildNumber": "1.0.4"
     },
     "android": {
       "package": "com.spi.superarparainovar",
-      "versionCode": 10
+      "versionCode": 10,
+      "permissions": ["CAMERA", "WRITE_EXTERNAL_STORAGE", "CAMERA_ROLL"]
     },
     "version": "1.1.0",
     "description": "Aplicativo Superar Para Inovar - SPI ",
