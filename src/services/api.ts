@@ -6,6 +6,7 @@ const api = axios.create({
   //baseURL: `http://192.168.11.105:3000`,
   //baseURL: "http://192.168.10.16:3000"
   //baseURL: "http://192.168.11.176:3000"
+  //baseURL: "http://192.168.11.67:3000"
 });
 
 export { api };
